@@ -38,7 +38,7 @@ so changing a theme requires a rebuild/restart — one build serves one topic.
 |---|---|---|---|
 | `NEXT_PUBLIC_API_BASE_URL` | yes | `http://localhost:3000` | Engine base URL |
 | `NEXT_PUBLIC_TOPIC_SLUG` | yes | `capitals` | Engine topic slug (must match the engine's `topics.manifest.json`); bound at login |
-| `NEXT_PUBLIC_APP_NAME` | yes | `Capitalz Quiz` | Display name in titles, dev tool, referral copy |
+| `NEXT_PUBLIC_APP_NAME` | yes | `Planetz Quiz` | Display name in titles, dev tool, referral copy |
 | `NEXT_PUBLIC_FIELD_DISPLAY_NAME` | yes | `countryName` | Key inside `question.publicFields` used as the question title |
 | `NEXT_PUBLIC_FIELD_BADGE` | no | `flagEmoji` | Key in `publicFields` for a small icon/emoji; leave empty for none |
 | `NEXT_PUBLIC_SCOPE_PARAM` | no | `continent` | Query-param name the engine reads for scope filtering |
@@ -74,18 +74,7 @@ Two groups of keys are theme-specific and must exist for your topic in every loc
 
 Missing keys render as the raw key string, so add all of them.
 
-## Example: capitals vs planets
-
-**Capitals `.env.local`:**
-```
-NEXT_PUBLIC_TOPIC_SLUG=capitals
-NEXT_PUBLIC_APP_NAME=Capitalz Quiz
-NEXT_PUBLIC_FIELD_DISPLAY_NAME=countryName
-NEXT_PUBLIC_FIELD_BADGE=flagEmoji
-NEXT_PUBLIC_SCOPE_PARAM=continent
-NEXT_PUBLIC_SCOPES=WORLD:scope.world,africa:scope.africa,americas:scope.americas,asia:scope.asia,europe:scope.europe,oceania:scope.oceania
-NEXT_PUBLIC_MAX_ITEM_COUNT=195
-```
+## Example: planets
 
 **Planets `.env.local`:**
 ```

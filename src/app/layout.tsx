@@ -11,9 +11,9 @@ export const metadata: Metadata = {
   title: topicConfig.appName,
   description: `${topicConfig.appName} quiz`,
   icons: {
-    icon: "/logo/tab-logo.jpeg",
-    shortcut: "/logo/tab-logo.jpeg",
-    apple: "/logo/tab-logo.jpeg",
+    icon: "/logo/tab-logo.png",
+    shortcut: "/logo/tab-logo.png",
+    apple: "/logo/tab-logo.png",
   },
 };
 
