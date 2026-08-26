@@ -37,7 +37,7 @@ so changing a theme requires a rebuild/restart — one build serves one topic.
 | Variable | Required | Example | Purpose |
 |---|---|---|---|
 | `NEXT_PUBLIC_API_BASE_URL` | yes | `http://localhost:3000` | Engine base URL |
-| `NEXT_PUBLIC_TOPIC_SLUG` | yes | `capitals` | Engine topic slug (must match the engine's `topics.manifest.json`); bound at login |
+| `NEXT_PUBLIC_TOPIC_SLUG` | yes | `planets` | Engine topic slug (must match the engine's `topics.manifest.json`); bound at login |
 | `NEXT_PUBLIC_APP_NAME` | yes | `Planetz Quiz` | Display name in titles, dev tool, referral copy |
 | `NEXT_PUBLIC_FIELD_DISPLAY_NAME` | yes | `countryName` | Key inside `question.publicFields` used as the question title |
 | `NEXT_PUBLIC_FIELD_BADGE` | no | `flagEmoji` | Key in `publicFields` for a small icon/emoji; leave empty for none |
