@@ -133,7 +133,7 @@ export const uk: Record<keyof typeof en, string> = {
   question_mode_title: 'Режим вікторини',
   question_mode_desc: 'Оберіть тип відповіді, напрям питання та регіональне охоплення для наступного питання.',
   question_scope_label: 'Регіон питань',
-  question_scope_desc: 'Обмежте список країн конкретним регіоном або виберіть увесь світ.',
+  question_scope_desc: 'Обмежте запитання певною категорією або використовуйте повний набір.',
   question_scope_chip_label: 'Поточний регіон: {scope}',
   question_scope_world: 'Увесь світ',
   question_scope_africa: 'Африка',

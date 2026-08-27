@@ -133,7 +133,7 @@ export const es: Record<keyof typeof en, string> = {
   question_mode_title: 'Modo de juego',
   question_mode_desc: 'Elige el tipo de respuesta, la dirección de la pregunta y el alcance geográfico para la siguiente pregunta.',
   question_scope_label: 'Alcance de la pregunta',
-  question_scope_desc: 'Limita los países a una región específica o selecciona todo el mundo.',
+  question_scope_desc: 'Limita las preguntas a una categoría o utiliza todo el conjunto.',
   question_scope_chip_label: 'Alcance actual: {scope}',
   question_scope_world: 'Todo el mundo',
   question_scope_africa: 'África',

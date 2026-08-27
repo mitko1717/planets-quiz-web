@@ -131,7 +131,7 @@ export const en = {
   question_mode_title: 'Quiz mode',
   question_mode_desc: 'Choose answer type, question direction, and scope for the next question.',
   question_scope_label: 'Question scope',
-  question_scope_desc: 'Limit target countries to a region or keep the full world pool.',
+  question_scope_desc: 'Limit questions to a category or keep the full pool.',
   question_scope_chip_label: 'Current scope: {scope}',
   question_scope_world: 'World',
   question_scope_africa: 'Africa',
