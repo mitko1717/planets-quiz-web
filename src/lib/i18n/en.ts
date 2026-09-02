@@ -105,8 +105,7 @@ export const en = {
   question_direction_label: 'Question direction',
   capitals_prompt_noun: 'capital',
   capitals_answer_noun: 'country',
-  planets_prompt_noun: 'position',
-  planets_answer_noun: 'planet',
+
   scope_world: 'All',
   scope_terrestrial: 'Terrestrial',
   scope_gasGiant: 'Gas giant',
@@ -296,6 +295,8 @@ export const en = {
   pagination_prev: 'Prev',
   pagination_next: 'Next',
 
+  planets_prompt_noun: 'position',
+  planets_answer_noun: 'planet',
   planets_label_position: 'position from the Sun',
   planets_label_moons: 'number of moons',
   planets_label_diameter: 'diameter (km)',
@@ -305,5 +306,20 @@ export const en = {
   planets_label_temperature: 'avg temperature (°C)',
   planets_label_type: 'planet type',
   planets_label_rings: 'has rings?',
-  planets_label_color: 'color'
+  planets_label_color: 'color',
+  planets_value_yes: 'Yes',
+  planets_value_no: 'No',
+  planets_value_type_terrestrial: 'Terrestrial',
+  planets_value_type_gas_giant: 'Gas giant',
+  planets_value_type_ice_giant: 'Ice giant',
+  planets_value_type_dwarf: 'Dwarf',
+  planets_value_color_gray: 'Gray',
+  planets_value_color_yellow_white: 'Yellow-white',
+  planets_value_color_blue: 'Blue',
+  planets_value_color_red: 'Red',
+  planets_value_color_orange_white: 'Orange-white',
+  planets_value_color_pale_gold: 'Pale gold',
+  planets_value_color_pale_blue: 'Pale blue',
+  planets_value_color_deep_blue: 'Deep blue',
+  planets_value_color_brown_white: 'Brown-white'
 } as const;

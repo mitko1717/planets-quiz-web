@@ -110,16 +110,25 @@ function QuestionHeading({ question, actions }: QuestionHeadingProps) {
   const answerNoun = t(`${topicConfig.slug}_answer_noun` as TranslationKey);
   const promptNoun = t(`${topicConfig.slug}_prompt_noun` as TranslationKey);
 
-  // question.prompt may be an i18n key (topics that localize the prompt label).
-  // If it resolves to a different string, use it; else fall back to raw value.
-  const localizedPromptValue = question.prompt ? t(question.prompt as TranslationKey) : '';
-  const promptValue = localizedPromptValue && localizedPromptValue !== question.prompt
-    ? `${displayName} · ${localizedPromptValue}`
-    : displayName;
+  // Localize a prompt token that may be an i18n key. Returns the raw token if no key matches.
+  const localizeToken = (token: string): string => {
+    const resolved = t(token as TranslationKey);
+    return resolved && resolved !== token ? resolved : token;
+  };
 
-  const prompt = question.questionDirection === QuestionDirection.REVERSE
-    ? t('question_prompt_reverse', { value: question.prompt, answerNoun, promptNoun })
-    : t('question_prompt', { value: promptValue, promptNoun });
+  let prompt: string;
+  if (question.questionDirection === QuestionDirection.REVERSE) {
+    // Reverse prompt may be "labelKey|answerValue" (variant topics) or a plain value.
+    const [maybeLabel, maybeValue] = String(question.prompt).split('|');
+    const value = maybeValue !== undefined ? `${localizeToken(maybeLabel)}: ${maybeValue}` : question.prompt;
+    prompt = t('question_prompt_reverse', { value, answerNoun, promptNoun });
+  } else {
+    const localizedLabel = localizeToken(String(question.prompt));
+    const promptValue = localizedLabel !== String(question.prompt)
+      ? `${displayName} · ${localizedLabel}`
+      : displayName;
+    prompt = t('question_prompt', { value: promptValue, promptNoun });
+  }
 
   return (
     <div className="mb-2 grid grid-cols-[minmax(0,3fr)_auto] items-start gap-2 sm:mb-4 sm:gap-3">
@@ -157,6 +166,11 @@ function AnswerOptionsList({ question, selectedOption, hasAnswered, submittingAn
   const { t } = useI18n();
   const noneOfAboveLabel = t('question_none_of_the_above');
 
+  const localizeOption = (option: string): string => {
+    const resolved = t(option as TranslationKey);
+    return resolved && resolved !== option ? resolved : option;
+  };
+
   return (
     <div className="min-w-0 space-y-1 sm:space-y-1.5">
       {question.options.map((option) => {
@@ -169,7 +183,7 @@ function AnswerOptionsList({ question, selectedOption, hasAnswered, submittingAn
         return (
           <AnswerOption
             key={option}
-            label={option}
+            label={localizeOption(option)}
             selected={isSelected}
             locked={hasAnswered || submittingAnswer || triedWrong}
             triedWrong={triedWrong}
