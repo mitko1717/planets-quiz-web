@@ -294,5 +294,16 @@ export const en = {
 
   pagination_page_of: 'Page {page} of {total}',
   pagination_prev: 'Prev',
-  pagination_next: 'Next'
+  pagination_next: 'Next',
+
+  planets_label_position: 'position from the Sun',
+  planets_label_moons: 'number of moons',
+  planets_label_diameter: 'diameter (km)',
+  planets_label_distance: 'distance from the Sun (M km)',
+  planets_label_orbital: 'orbital period (days)',
+  planets_label_gravity: 'gravity (m/s²)',
+  planets_label_temperature: 'avg temperature (°C)',
+  planets_label_type: 'planet type',
+  planets_label_rings: 'has rings?',
+  planets_label_color: 'color'
 } as const;

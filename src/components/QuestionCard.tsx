@@ -110,9 +110,16 @@ function QuestionHeading({ question, actions }: QuestionHeadingProps) {
   const answerNoun = t(`${topicConfig.slug}_answer_noun` as TranslationKey);
   const promptNoun = t(`${topicConfig.slug}_prompt_noun` as TranslationKey);
 
+  // question.prompt may be an i18n key (topics that localize the prompt label).
+  // If it resolves to a different string, use it; else fall back to raw value.
+  const localizedPromptValue = question.prompt ? t(question.prompt as TranslationKey) : '';
+  const promptValue = localizedPromptValue && localizedPromptValue !== question.prompt
+    ? `${displayName} · ${localizedPromptValue}`
+    : displayName;
+
   const prompt = question.questionDirection === QuestionDirection.REVERSE
     ? t('question_prompt_reverse', { value: question.prompt, answerNoun, promptNoun })
-    : t('question_prompt', { value: displayName, promptNoun });
+    : t('question_prompt', { value: promptValue, promptNoun });
 
   return (
     <div className="mb-2 grid grid-cols-[minmax(0,3fr)_auto] items-start gap-2 sm:mb-4 sm:gap-3">
@@ -352,8 +359,7 @@ export function QuestionCard({
   const hasAnswered = Boolean(skipResult) || Boolean(answerResult?.answerRevealed);
   const isFreeTextMode = inputMode === QuizInputMode.FREE_TEXT;
   const transitionKey = loadingQuestion ? 'loading' : `${questionDirection}:${inputMode}:${question?.itemId ?? 'empty'}`;
-  const resultState = answerResult?.correct === true
-      ? 'correct'
+  const resultState = answerResult?.correct === true ? 'correct'
     : skipResult || answerResult?.correct === false || wrongSelections.length > 0
       ? 'wrong'
       : null;

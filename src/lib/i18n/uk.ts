@@ -296,5 +296,16 @@ export const uk: Record<keyof typeof en, string> = {
 
   pagination_page_of: 'Сторінка {page} з {total}',
   pagination_prev: 'Назад',
-  pagination_next: 'Вперед'
+  pagination_next: 'Вперед',
+
+  planets_label_position: 'позиція від Сонця',
+  planets_label_moons: 'кількість супутників',
+  planets_label_diameter: 'діаметр (км)',
+  planets_label_distance: 'відстань від Сонця (млн км)',
+  planets_label_orbital: 'орбітальний період (дні)',
+  planets_label_gravity: 'гравітація (м/с²)',
+  planets_label_temperature: 'сер. температура (°C)',
+  planets_label_type: 'тип планети',
+  planets_label_rings: 'чи має кільця?',
+  planets_label_color: 'колір'
 };

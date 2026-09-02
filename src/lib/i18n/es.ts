@@ -296,5 +296,16 @@ export const es: Record<keyof typeof en, string> = {
 
   pagination_page_of: 'Página {page} de {total}',
   pagination_prev: 'Anterior',
-  pagination_next: 'Siguiente'
+  pagination_next: 'Siguiente',
+
+  planets_label_position: 'posición desde el Sol',
+  planets_label_moons: 'número de lunas',
+  planets_label_diameter: 'diámetro (km)',
+  planets_label_distance: 'distancia del Sol (M km)',
+  planets_label_orbital: 'período orbital (días)',
+  planets_label_gravity: 'gravedad (m/s²)',
+  planets_label_temperature: 'temp. media (°C)',
+  planets_label_type: 'tipo de planeta',
+  planets_label_rings: '¿tiene anillos?',
+  planets_label_color: 'color',
 };
