@@ -166,6 +166,13 @@ function AnswerOptionsList({ question, selectedOption, hasAnswered, submittingAn
   const { t } = useI18n();
   const noneOfAboveLabel = t('question_none_of_the_above');
 
+  // Localize an option value that may be an i18n key (e.g. mapper-emitted enum values
+  // like planets_value_type_terrestrial). Returns the raw value if no key matches.
+  const localizeOption = (value: string): string => {
+    const resolved = t(value as TranslationKey);
+    return resolved && resolved !== value ? resolved : value;
+  };
+
   const sortedOptions = [...question.options].sort((a, b) => {
     if (a === noneOfAboveLabel) return 1;
     if (b === noneOfAboveLabel) return -1;
@@ -184,7 +191,7 @@ function AnswerOptionsList({ question, selectedOption, hasAnswered, submittingAn
         return (
           <AnswerOption
             key={option}
-            label={option}
+            label={localizeOption(option)}
             selected={isSelected}
             locked={hasAnswered || submittingAnswer || triedWrong}
             triedWrong={triedWrong}
@@ -374,7 +381,8 @@ export function QuestionCard({
   const hasAnswered = Boolean(skipResult) || Boolean(answerResult?.answerRevealed);
   const isFreeTextMode = inputMode === QuizInputMode.FREE_TEXT;
   const transitionKey = loadingQuestion ? 'loading' : `${questionDirection}:${inputMode}:${question?.itemId ?? 'empty'}`;
-  const resultState = answerResult?.correct === true ? 'correct'
+  const resultState = answerResult?.correct === true
+      ? 'correct'
     : skipResult || answerResult?.correct === false || wrongSelections.length > 0
       ? 'wrong'
       : null;

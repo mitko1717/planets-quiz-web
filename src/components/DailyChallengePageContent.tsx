@@ -152,6 +152,7 @@ function ScoreBadge({ scoreLabel }: { scoreLabel: string }) {
 
 function RefreshButton({ loading, submitting, onRefresh }: { loading: boolean; submitting: boolean; onRefresh: () => void }) {
   const { t } = useI18n();
+  
   return (
     <Button
       type="button"
@@ -236,6 +237,7 @@ function QuestionOptions({ options, selectedOption, submitting, onSelect }: {
 function AnswerFeedback({ answerResult }: { answerResult: DailyChallengeAnswerResponse | null }) {
   const { t } = useI18n();
   if (!answerResult) return null;
+
   return (
     <p className={["mt-4 text-sm", answerResult.correct ? "text-pastel-mint" : "text-pastel-coral"].join(" ")}>
       {answerResult.correct ? t("daily_challenge_answer_correct") : t("daily_challenge_answer_wrong", { answer: answerResult.correctAnswer })}
