@@ -121,17 +121,17 @@ export function useQuiz(token: string): UseQuizResult {
   const fetchQuestionRef = useRef(fetchQuestionMutation.mutateAsync);
 
   const submitAnswerMutation = useMutation({
-    mutationFn: (payload: { itemId: string; difficulty: DifficultyLevel; selectedOption: string }) => apiClient.submitAnswer(payload, token),
+    mutationFn: (payload: { questionId: string; selectedOption: string }) => apiClient.submitAnswer(payload, token),
     onSuccess: async () => { await queryClient.invalidateQueries({ queryKey: queryKeys.progressRoot(token) }); },
   });
 
   const skipQuestionMutation = useMutation({
-    mutationFn: (payload: { itemId: string; difficulty: DifficultyLevel }) => apiClient.skipQuestion(payload, token),
+    mutationFn: (payload: { questionId: string }) => apiClient.skipQuestion(payload, token),
     onSuccess: async () => { await queryClient.invalidateQueries({ queryKey: queryKeys.progressRoot(token) }); },
   });
 
   const hintMutation = useMutation({
-    mutationFn: (payload: { itemId: string; difficulty: DifficultyLevel }) => apiClient.useHint(payload, token),
+    mutationFn: (payload: { questionId: string }) => apiClient.useHint(payload, token),
     onSuccess: async () => { await queryClient.invalidateQueries({ queryKey: queryKeys.progressRoot(token) }); },
   });
 
@@ -290,7 +290,7 @@ export function useQuiz(token: string): UseQuizResult {
     setError(null);
 
     try {
-      const res = await submitAnswerMutation.mutateAsync({ itemId: question.itemId, difficulty, selectedOption });
+      const res = await submitAnswerMutation.mutateAsync({ questionId: question.questionId, selectedOption });
       setAnswerResult(res);
       setLiveInsightPoints(res.updatedInsightPoints);
       setDifficultySuggestion(res.difficultySuggestion);
@@ -314,7 +314,7 @@ export function useQuiz(token: string): UseQuizResult {
     setError(null);
 
     try {
-      const res = await skipQuestionMutation.mutateAsync({ itemId: question.itemId, difficulty });
+      const res = await skipQuestionMutation.mutateAsync({ questionId: question.questionId });
       setSkipResult(res);
       setLiveInsightPoints(res.updatedInsightPoints);
     } catch (cause) {
@@ -332,7 +332,7 @@ export function useQuiz(token: string): UseQuizResult {
     setError(null);
 
     try {
-      const res = await hintMutation.mutateAsync({ itemId: question.itemId, difficulty });
+      const res = await hintMutation.mutateAsync({ questionId: question.questionId });
       setHintResult(res);
       setLiveInsightPoints(res.updatedInsightPoints);
       if (res.type === HintType.REMOVE_OPTION) {
@@ -368,8 +368,7 @@ export function useQuiz(token: string): UseQuizResult {
 
   const submittingAnswer = submitAnswerMutation.isPending || skipQuestionMutation.isPending || hintMutation.isPending;
   const statsError = statsQuery.error instanceof Error ? statsQuery.error.message : null;
-  const totalInsightPoints =
-    liveInsightPoints ?? (typeof statsQuery.data?.totalInsightPoints === 'number' ? statsQuery.data.totalInsightPoints : null);
+  const totalInsightPoints = liveInsightPoints ?? (typeof statsQuery.data?.totalInsightPoints === 'number' ? statsQuery.data.totalInsightPoints : null);
 
   return {
     difficulty,
