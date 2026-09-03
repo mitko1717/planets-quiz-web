@@ -321,5 +321,15 @@ export const en = {
   planets_value_color_pale_gold: 'Pale gold',
   planets_value_color_pale_blue: 'Pale blue',
   planets_value_color_deep_blue: 'Deep blue',
-  planets_value_color_brown_white: 'Brown-white'
+  planets_value_color_brown_white: 'Brown-white',
+  planets_question_position: "What position is {planet} from the Sun?",
+  planets_question_moons: "How many moons does {planet} have?",
+  planets_question_diameter: "What is {planet}'s diameter, in kilometers?",
+  planets_question_distance: "How far is {planet} from the Sun, in million km?",
+  planets_question_orbital: "How long is {planet}'s orbital period, in days?",
+  planets_question_gravity: "What is {planet}'s surface gravity, in m/s²?",
+  planets_question_temperature: "What is {planet}'s average temperature, in °C?",
+  planets_question_type: "What type of planet is {planet}?",
+  planets_question_rings: "Does {planet} have rings?",
+  planets_question_color: "What color is {planet}?",
 } as const;
