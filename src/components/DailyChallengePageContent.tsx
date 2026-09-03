@@ -203,11 +203,13 @@ function QuestionOptions({ options, selectedOption, submitting, onSelect }: {
   onSelect: (option: string) => void;
 }) {
   const { t } = useI18n();
+  const noneOfAboveLabel = t("question_none_of_the_above");
+  
   return (
     <div className="mt-4 space-y-2">
       {options.map((option) => {
         const selected = selectedOption === option;
-        const isNoneOfAbove = option === t("question_none_of_the_above");
+        const isNoneOfAbove = option === noneOfAboveLabel;
 
         return (
           <Button
@@ -217,7 +219,11 @@ function QuestionOptions({ options, selectedOption, submitting, onSelect }: {
             size="lg"
             onClick={() => onSelect(option)}
             disabled={submitting}
-            className={["w-full text-left font-normal", isNoneOfAbove ? "border-dashed border-[1.5px] bg-base-700/85 text-ink-200" : ""].join(" ")}
+            className={[
+              "w-full text-left font-normal",
+              isNoneOfAbove && !selected ? "border-dashed border-[1.5px] bg-base-700/85 text-ink-200" : "",
+              isNoneOfAbove && selected ? "border-solid border-[1.5px] bg-accent-green/10 text-accent-green" : ""
+            ].join(" ")}
           >
             {option}
           </Button>

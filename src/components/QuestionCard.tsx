@@ -166,14 +166,15 @@ function AnswerOptionsList({ question, selectedOption, hasAnswered, submittingAn
   const { t } = useI18n();
   const noneOfAboveLabel = t('question_none_of_the_above');
 
-  const localizeOption = (option: string): string => {
-    const resolved = t(option as TranslationKey);
-    return resolved && resolved !== option ? resolved : option;
-  };
+  const sortedOptions = [...question.options].sort((a, b) => {
+    if (a === noneOfAboveLabel) return 1;
+    if (b === noneOfAboveLabel) return -1;
+    return 0;
+  });
 
   return (
     <div className="min-w-0 space-y-1 sm:space-y-1.5">
-      {question.options.map((option) => {
+      {sortedOptions.map((option) => {
         const isSelected = selectedOption === option;
         const isCorrectAnswer = hasAnswered && option === (skipResult?.correctAnswer ?? answerResult?.correctAnswer);
         const isWrongSelection = hasAnswered && isSelected && (answerResult ? !answerResult.correct : false);
@@ -183,7 +184,7 @@ function AnswerOptionsList({ question, selectedOption, hasAnswered, submittingAn
         return (
           <AnswerOption
             key={option}
-            label={localizeOption(option)}
+            label={option}
             selected={isSelected}
             locked={hasAnswered || submittingAnswer || triedWrong}
             triedWrong={triedWrong}
