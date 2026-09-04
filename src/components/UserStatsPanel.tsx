@@ -7,7 +7,7 @@ import { Modal } from "@/components/Modal";
 import { Button } from "@/components/button";
 import { OfflineStateHint, SkeletonBlock, SkeletonText } from "@/components/Skeleton";
 import { RefreshIcon } from "@/components/icons/RefreshIcon";
-import { AchievementScope, type AchievementProgressResponse, type DifficultyLevel, type UserAnswerStatsByDifficulty } from "@/lib/types";
+import type { AchievementProgressResponse, DifficultyLevel, UserAnswerStatsByDifficulty } from "@/lib/types";
 import type {
   ActiveDifficultyPanelProps,
   DifficultyStatsTableProps,
@@ -145,8 +145,8 @@ function AchievementsPanel({ achievements }: { achievements: AchievementProgress
   const { t } = useI18n();
   if (achievements.length === 0) return null;
 
-  const globalAchievements = achievements.filter((a) => a.scope === AchievementScope.GLOBAL);
-  const topicAchievements = achievements.filter((a) => a.scope === AchievementScope.TOPIC);
+  const globalAchievements = achievements.filter((a) => a.scope === 'global');
+  const topicAchievements = achievements.filter((a) => a.scope === 'topic');
 
   function renderAchievement(a: AchievementProgressResponse) {
     const unlocked = a.unlockedAt !== null;
@@ -155,9 +155,9 @@ function AchievementsPanel({ achievements }: { achievements: AchievementProgress
     return (
       <div
         key={a.achievementId}
-        className={["rounded-xl border p-1.5", unlocked ? "border-accent-greenDim/40 bg-accent-green/10" : "border-base-600 bg-base-700/35"].join(" ")}
+        className={["rounded-xl border p-3", unlocked ? "border-accent-greenDim/40 bg-accent-green/10" : "border-base-600 bg-base-700/35"].join(" ")}
       >
-        <div className="flex items-center justify-between gap-1.5">
+        <div className="flex items-center justify-between gap-2">
           <p className="text-sm font-semibold text-ink-100">{a.name}</p>
           <p className={unlocked ? "text-xs text-accent-green" : "text-xs text-ink-500"}>
             {unlocked ? t('achievements_unlocked') : `${a.currentValue}/${a.threshold}`}
@@ -170,15 +170,15 @@ function AchievementsPanel({ achievements }: { achievements: AchievementProgress
   }
 
   return (
-    <div className="mb-4 rounded-2xl border border-base-600 bg-base-700/40 p-2">
+    <div className="mb-4 rounded-2xl border border-base-600 bg-base-700/40 p-4">
       <SectionLabel>{t('achievements_label')}</SectionLabel>
-      <div className="mt-2 grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="mt-3 grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
         {globalAchievements.map(renderAchievement)}
       </div>
       {topicAchievements.length > 0 ? (
         <>
-          <p className="mt-2 text-xs uppercase tracking-[0.12em] text-ink-500">{t('achievements_topic_label')}</p>
-          <div className="mt-1.5 grid gap-1.5 sm:grid-cols-2 lg:grid-cols-3">
+          <p className="mt-4 text-xs uppercase tracking-[0.12em] text-ink-500">{t('achievements_topic_label')}</p>
+          <div className="mt-2 grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
             {topicAchievements.map(renderAchievement)}
           </div>
         </>
