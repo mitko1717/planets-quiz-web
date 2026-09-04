@@ -339,6 +339,7 @@ export const en = {
   planets_value_color_pale_blue: 'Pale blue',
   planets_value_color_deep_blue: 'Deep blue',
   planets_value_color_brown_white: 'Brown-white',
+  planets_value_color_gray_white: 'Gray-white',
   planets_question_position: "What position is {planet} from the Sun?",
   planets_question_moons: "How many moons does {planet} have?",
   planets_question_diameter: "What is {planet}'s diameter, in kilometers?",

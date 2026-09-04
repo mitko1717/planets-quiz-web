@@ -341,6 +341,8 @@ export const uk: Record<keyof typeof en, string> = {
   planets_value_color_pale_blue: 'Блідо-блакитний',
   planets_value_color_deep_blue: 'Темно-синій',
   planets_value_color_brown_white: 'Коричнево-білий',
+  planets_value_color_gray_white: 'Сіро-білий',
+  
   planets_question_position: "На якій позиції від Сонця знаходиться {planet}?",
   planets_question_moons: "Скільки супутників має {planet}?",
   planets_question_diameter: "Який діаметр {planet} у кілометрах?",
