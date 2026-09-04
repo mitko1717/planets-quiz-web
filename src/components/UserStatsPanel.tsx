@@ -85,12 +85,15 @@ function ErrorState({ error }: ErrorStateProps) {
   );
 }
 
-function ProgressBar({ progress, tone = "accent" }: ProgressBarProps) {
-  const width = tone === "accent" ? Math.max(6, Math.round(progress * 100)) : Math.round(progress * 100);
+function ProgressBar({ progress, tone }: { progress: number; tone: "accent" | "muted" }) {
+  const percentage = Math.min(100, Math.max(0, progress * 100));
   
   return (
-    <div className="mt-3 h-3 overflow-hidden rounded-full bg-base-700">
-      <div className={["h-full rounded-full transition-all duration-300", tone === "accent" ? "bg-accent-green" : "bg-ink-400"].join(" ")} style={{ width: `${width}%` }} />
+    <div className="mt-1.5 h-1 w-full overflow-hidden rounded-full bg-base-600">
+      <div 
+        className={["h-full rounded-full transition-all duration-300", tone === "accent" ? "bg-accent-green" : "bg-base-400"].join(" ")} 
+        style={{ width: `${percentage}%` }}
+      />
     </div>
   );
 }
@@ -186,12 +189,12 @@ function AchievementsPanel({ achievements }: { achievements: AchievementProgress
   }
 
   if (topicAchievements.length > 0) {
-    const topicGroups = new Map<string, AchievementProgressResponse[]>();
-    
+    const topicGroups = new Map<string, { name: string; achievements: AchievementProgressResponse[] }>();
+
     for (const achievement of topicAchievements) {
       const key = achievement.topicId ?? "unknown";
-      if (!topicGroups.has(key)) topicGroups.set(key, []);
-      topicGroups.get(key)!.push(achievement);
+      if (!topicGroups.has(key)) topicGroups.set(key, { name: achievement.topicName ?? key, achievements: [] });
+      topicGroups.get(key)!.achievements.push(achievement);
     }
 
     items.push({
@@ -199,12 +202,12 @@ function AchievementsPanel({ achievements }: { achievements: AchievementProgress
       title: t('achievements_topic_label'),
       content: (
         <Accordion
-          items={Array.from(topicGroups.entries()).map(([topicId, achievements]) => ({
+          items={Array.from(topicGroups.entries()).map(([topicId, group]) => ({
             id: topicId,
-            title: topicId === "unknown" ? "Unknown Topic" : (topicId.charAt(0).toUpperCase() + topicId.slice(1)),
+            title: group.name,
             content: (
               <div className="grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
-                {achievements.map(renderAchievement)}
+                {group.achievements.map(renderAchievement)}
               </div>
             )
           }))}
