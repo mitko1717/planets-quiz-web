@@ -129,7 +129,7 @@ function GlobalStatsPanel({ stats }: GlobalStatsPanelProps) {
         <div className="mt-4 grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
           {stats.byTopic.map((topic) => (
             <div key={topic.topicId} className="rounded-xl border border-base-600 bg-base-900/30 p-3 text-xs text-ink-300">
-              <p className="text-ink-500">{topic.name}</p>
+              <p className="text-ink-500">{topic.topicId}</p>
               <p className="mt-1 text-ink-100">
                 {topic.correctAttempts}/{topic.totalAttempts} · {formatPercent(topic.accuracy)}
               </p>
