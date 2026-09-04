@@ -85,7 +85,7 @@ function ErrorState({ error }: ErrorStateProps) {
 }
 
 function ProgressBar({ progress, tone }: { progress: number; tone: "accent" | "muted" }) {
-  const percentage = Math.min(100, Math.max(0, progress * 100));
+  const percentage = Math.min(100, Math.max(0, progress <= 1 ? progress * 100 : progress));
   
   return (
     <div className="mt-1.5 h-1 w-full overflow-hidden rounded-full bg-base-600">
@@ -276,7 +276,14 @@ function HeroPanel({ stats, refreshing, onRefresh }: HeroPanelProps) {
           ) : null}
         </div>
 
-        <ProgressBar progress={nextUnlockStatus?.progress ?? 1} tone="accent" />
+        <ProgressBar
+          progress={nextUnlockStatus
+            ? nextUnlockStatus.requiredCorrectAnswers > 0
+              ? nextUnlockStatus.correctAnswersTowardsUnlock / nextUnlockStatus.requiredCorrectAnswers
+              : 1
+            : 1}
+          tone="accent"
+        />
       </div>
     </div>
   );
@@ -453,7 +460,10 @@ function UnlockLevelCard({ level }: UnlockLevelCardProps) {
           {level.unlocked ? t('stats_unlock_open') : t('stats_unlock_locked')}
         </p>
       </div>
-      <ProgressBar progress={level.progress} tone={level.unlocked ? "accent" : "muted"} />
+      <ProgressBar
+        progress={level.requiredCorrectAnswers > 0 ? level.correctAnswersTowardsUnlock / level.requiredCorrectAnswers : level.unlocked ? 1 : 0}
+        tone={level.unlocked ? "accent" : "muted"}
+      />
       <p className="mt-2 text-xs text-ink-400">
         {level.difficultyLevel === 1
           ? t('stats_starter_level')
