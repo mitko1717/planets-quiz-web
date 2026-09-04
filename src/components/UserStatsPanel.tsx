@@ -24,6 +24,7 @@ import type {
 } from "./UserStatsPanel.types";
 import { formatPercent } from "@/lib/utils";
 import { Accordion } from "./common/Accordion";
+import { topicConfig } from "@/lib/topic.config";
 
 function PanelShell({ children, variant = "default" }: PanelShellProps) {
   return (
@@ -169,6 +170,15 @@ function AchievementsPanel({ achievements }: { achievements: AchievementProgress
   const globalAchievements = achievements.filter((a) => a.scope === AchievementScope.GLOBAL);
   const topicAchievements = achievements.filter((a) => a.scope === AchievementScope.TOPIC);
 
+  // don't link to the game the user is already in
+  const currentBotLink = topicConfig.telegramBotUsername ? `https://t.me/${topicConfig.telegramBotUsername}` : null;
+
+  function isCurrentGameLink(gameLink: string): boolean {
+    if (!currentBotLink) return false;
+    const normalize = (url: string) => url.split('?')[0].replace(/\/$/, '').toLowerCase();
+    return normalize(gameLink) === normalize(currentBotLink);
+  }
+
   function GameLinkButton({ href }: { href: string }) {
     return (
       <a
@@ -199,7 +209,7 @@ function AchievementsPanel({ achievements }: { achievements: AchievementProgress
         <div className="flex items-center justify-between gap-2">
           <div className="flex min-w-0 items-center gap-1.5">
             <p className="truncate text-sm font-semibold text-ink-100">{a.name ? `${a.name.charAt(0).toUpperCase()}${a.name.slice(1)}` : a.name}</p>
-            {a.gameLink ? <GameLinkButton href={a.gameLink} /> : null}
+            {a.gameLink && !isCurrentGameLink(a.gameLink) ? <GameLinkButton href={a.gameLink} /> : null}
           </div>
           <p className={["shrink-0", unlocked ? "text-xs text-accent-green" : "text-xs text-ink-500"].join(" ")}>
             {unlocked ? t('achievements_unlocked') : `${currentValue}/${threshold}`}
