@@ -85,7 +85,7 @@ function ErrorState({ error }: ErrorStateProps) {
 }
 
 function ProgressBar({ progress, tone }: { progress: number; tone: "accent" | "muted" }) {
-  const percentage = Math.min(100, Math.max(0, progress <= 1 ? progress * 100 : progress));
+  const percentage = Math.min(100, Math.max(0, progress * 100));
   
   return (
     <div className="mt-1.5 h-1 w-full overflow-hidden rounded-full bg-base-600">
@@ -235,7 +235,7 @@ function HeroPanel({ stats, refreshing, onRefresh }: HeroPanelProps) {
   const nextUnlockStatus = nextUnlock ? stats.progression.levels.find((row) => row.difficultyLevel === nextUnlock) ?? null : null;;
 
   return (
-    <div className="rounded-2xl border border-accent-greenDim/40 bg-[linear-gradient(135deg,color-mix(in_srgb,var(--color-accent-green)_18%,transparent),color-mix(in_srgb,var(--color-base-900)_30%,transparent))] p-4">
+    <div className="rounded-2xl border border-accent-greenDim/40 bg-[linear-gradient(135deg,color-mix(in_srgb,var(--color-accent-green)_18%,transparent),color-mix(in_srgb,var(--color-base-900)_30%,transparent))] p-3">
       <div className="flex items-center justify-between gap-2">
         <SectionLabel>{t('stats_label')}</SectionLabel>
         <Button
@@ -255,7 +255,7 @@ function HeroPanel({ stats, refreshing, onRefresh }: HeroPanelProps) {
       <p className="mt-2 text-sm font-medium uppercase tracking-[0.12em] text-accent-green">{t('stats_points_suffix')}</p>
       <BodyText>{t('stats_summary', { answers: stats.totalAttempts, accuracy: formatPercent(stats.accuracy), streak: stats.bestStreakOverall })}</BodyText>
 
-      <div className="mt-4 rounded-xl border border-base-600/80 bg-base-900/30 p-4">
+      <div className="mt-4 rounded-xl border border-base-600/80 bg-base-900/30 p-3">
         <div className="flex items-center justify-between gap-3">
           <div>
             <p className="text-xs uppercase tracking-[0.12em] text-ink-500">{t('stats_progress_next')}</p>
@@ -276,14 +276,7 @@ function HeroPanel({ stats, refreshing, onRefresh }: HeroPanelProps) {
           ) : null}
         </div>
 
-        <ProgressBar
-          progress={nextUnlockStatus
-            ? nextUnlockStatus.requiredCorrectAnswers > 0
-              ? nextUnlockStatus.correctAnswersTowardsUnlock / nextUnlockStatus.requiredCorrectAnswers
-              : 1
-            : 1}
-          tone="accent"
-        />
+        <ProgressBar progress={nextUnlockStatus?.progress ?? 1} tone="accent" />
       </div>
     </div>
   );
@@ -460,10 +453,7 @@ function UnlockLevelCard({ level }: UnlockLevelCardProps) {
           {level.unlocked ? t('stats_unlock_open') : t('stats_unlock_locked')}
         </p>
       </div>
-      <ProgressBar
-        progress={level.requiredCorrectAnswers > 0 ? level.correctAnswersTowardsUnlock / level.requiredCorrectAnswers : level.unlocked ? 1 : 0}
-        tone={level.unlocked ? "accent" : "muted"}
-      />
+      <ProgressBar progress={level.progress} tone={level.unlocked ? "accent" : "muted"} />
       <p className="mt-2 text-xs text-ink-400">
         {level.difficultyLevel === 1
           ? t('stats_starter_level')
