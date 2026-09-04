@@ -3,6 +3,7 @@ export interface TopicStatsResponse {
   totalAttempts: number;
   correctAttempts: number;
   accuracy: number;
+  name: string;
 }
 
 export interface GlobalStatsResponse {
