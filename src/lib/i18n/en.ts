@@ -215,6 +215,8 @@ export const en = {
   stats_detail_title: 'Level {level} details',
   stats_detail_description: 'Per-difficulty performance and resource breakdown.',
   stats_detail_close: 'Close',
+  achievement_unlocked_title: 'Achievement Unlocked!',
+  achievement_unlocked_close: 'Nice!',
 
   global_stats_label: 'Global stats',
   global_stats_insight_points: 'Insight points',

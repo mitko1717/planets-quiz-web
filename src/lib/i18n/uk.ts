@@ -217,6 +217,8 @@ export const uk: Record<keyof typeof en, string> = {
   stats_detail_title: 'Деталі рівня {level}',
   stats_detail_description: 'Розподіл результатів та ресурсів за рівнем складності.',
   stats_detail_close: 'Закрити',
+  achievement_unlocked_title: 'Досягнення розблоковано!',
+  achievement_unlocked_close: 'Круто!',
 
   global_stats_label: 'Загальна статистика',
   global_stats_insight_points: 'Очки прозорливості',

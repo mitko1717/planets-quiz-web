@@ -217,6 +217,8 @@ export const es: Record<keyof typeof en, string> = {
   stats_detail_title: 'Detalles del nivel {level}',
   stats_detail_description: 'Desglose de rendimiento y recursos por nivel de dificultad.',
   stats_detail_close: 'Cerrar',
+  achievement_unlocked_title: '¡Logro Desbloqueado!',
+  achievement_unlocked_close: '¡Genial!',
 
   global_stats_label: 'Estadísticas globales',
   global_stats_insight_points: 'Puntos de perspicacia',
