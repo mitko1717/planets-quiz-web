@@ -170,7 +170,10 @@ function AchievementsPanel({ achievements }: { achievements: AchievementProgress
   const globalAchievements = achievements.filter((a) => a.scope === AchievementScope.GLOBAL);
   const topicAchievements = achievements.filter((a) => a.scope === AchievementScope.TOPIC);
 
-  // don't link to the game the user is already in
+  // Don't link to the game the user is already in. gameLink values come from the
+  // Game registry's tgBotLink (e.g. "https://t.me/planetz_quiz_bot"); the current
+  // app's own bot is topicConfig.telegramBotUsername — compare host+path, ignoring
+  // any query string (referral links append ?start=ref_XXX).
   const currentBotLink = topicConfig.telegramBotUsername ? `https://t.me/${topicConfig.telegramBotUsername}` : null;
 
   function isCurrentGameLink(gameLink: string): boolean {
