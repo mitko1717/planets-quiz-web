@@ -156,7 +156,7 @@ function AchievementsPanel({ achievements }: { achievements: AchievementProgress
     return (
       <div
         key={a.achievementId}
-        className={["rounded-xl border p-3", unlocked ? "border-accent-greenDim/40 bg-accent-green/10" : "border-base-600 bg-base-700/35"].join(" ")}
+        className={["rounded-xl border p-2", unlocked ? "border-accent-greenDim/40 bg-accent-green/10" : "border-base-600 bg-base-700/35"].join(" ")}
       >
         <div className="flex items-center justify-between gap-2">
           <p className="text-sm font-semibold text-ink-100">{a.name ? `${a.name.charAt(0).toUpperCase()}${a.name.slice(1)}` : a.name}</p>
@@ -189,7 +189,7 @@ function AchievementsPanel({ achievements }: { achievements: AchievementProgress
     const topicGroups = new Map<string, AchievementProgressResponse[]>();
     
     for (const achievement of topicAchievements) {
-      const key = achievement.name;
+      const key = achievement.topicId ?? "unknown";
       if (!topicGroups.has(key)) topicGroups.set(key, []);
       topicGroups.get(key)!.push(achievement);
     }
@@ -199,9 +199,9 @@ function AchievementsPanel({ achievements }: { achievements: AchievementProgress
       title: t('achievements_topic_label'),
       content: (
         <Accordion
-          items={Array.from(topicGroups.entries()).map(([name, achievements]) => ({
-            id: name,
-            title: name,
+          items={Array.from(topicGroups.entries()).map(([topicId, achievements]) => ({
+            id: topicId,
+            title: topicId === "unknown" ? "Unknown Topic" : (topicId.charAt(0).toUpperCase() + topicId.slice(1)),
             content: (
               <div className="grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
                 {achievements.map(renderAchievement)}
@@ -215,7 +215,7 @@ function AchievementsPanel({ achievements }: { achievements: AchievementProgress
 
   return (
     <div className="mb-4 overflow-hidden rounded-2xl border border-base-600 bg-base-700/40">
-      <Accordion items={items} defaultActiveId={items[0]?.id} className="h-[100dvh] md:h-[460px]" />
+      <Accordion items={items} className="max-h-[460px] min-h-[52px]" />
     </div>
   );
 }
