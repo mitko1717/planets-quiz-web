@@ -342,6 +342,7 @@ export const es: Record<keyof typeof en, string> = {
   planets_value_color_deep_blue: 'Azul profundo',
   planets_value_color_brown_white: 'Marrón-blanco',
   planets_value_color_gray_white: 'Gris blanquecino',
+  planets_value_color_red_brown: 'Rojo-marrón',
   planets_question_position: "¿En qué posición desde el Sol está {planet}?",
   planets_question_moons: "¿Cuántas lunas tiene {planet}?",
   planets_question_diameter: "¿Cuál es el diámetro de {planet}, en kilómetros?",
