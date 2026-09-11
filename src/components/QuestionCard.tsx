@@ -108,6 +108,7 @@ function QuestionHeading({ question, actions }: QuestionHeadingProps) {
   const { t } = useI18n();
   const displayName = (question.publicFields?.[topicConfig.publicFields.displayName] as string) ?? '';
   const badge = topicConfig.publicFields.badge ? ((question.publicFields?.[topicConfig.publicFields.badge] as string) ?? null) : null;
+  const isEnlargedForwardBadge = topicConfig.slug === 'flags' && question.questionDirection !== QuestionDirection.REVERSE;
 
   const answerNoun = t(`${topicConfig.slug}_answer_noun` as TranslationKey);
   const promptNoun = t(`${topicConfig.slug}_prompt_noun` as TranslationKey);
@@ -143,9 +144,16 @@ function QuestionHeading({ question, actions }: QuestionHeadingProps) {
   return (
     <div className="mb-2 grid grid-cols-[minmax(0,3fr)_auto] items-start gap-2 sm:mb-4 sm:gap-3">
       <div className="min-w-0">
+        {isEnlargedForwardBadge && badge ? (
+          <div className="mb-2 flex justify-center text-6xl sm:text-7xl" aria-hidden="true">
+            {badge}
+          </div>
+        ) : null}
         <h2 className="break-words text-lg font-semibold leading-snug text-ink-100 sm:mt-1 sm:text-2xl">
           {prompt}
-          {badge ? <span className="ml-2 inline-block align-middle" aria-hidden="true">{badge}</span> : null}
+          {badge && !isEnlargedForwardBadge ? (
+            <span className="ml-2 inline-block align-middle" aria-hidden="true">{badge}</span>
+          ) : null}
         </h2>
       </div>
       {actions ? <div className="flex shrink-0 justify-end gap-2">{actions}</div> : null}
