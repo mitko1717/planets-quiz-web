@@ -99,10 +99,12 @@ export const uk: Record<keyof typeof en, string> = {
   difficulty_unlocked_now: 'Відкрито!',
 
   question_loading: 'Отримання питання...',
-  question_prompt: 'Яка {promptNoun} у {value}?',
-  question_prompt_reverse: 'Яка {answerNoun} має {promptNoun} {value}?',
+
+  question_prompt: 'Яка {promptNoun} у планети {value}?',
+  question_prompt_reverse: '{value} - {promptNoun} якої планети?',
   question_input_mode_label: 'Режим відповіді',
   question_input_mode_multiple_choice: 'Вибір з варіантів',
+
   question_input_mode_free_text: 'Введення вручну',
   question_direction_label: 'Напрям питання',
   capitals_prompt_noun: 'столиці',
@@ -118,6 +120,7 @@ export const uk: Record<keyof typeof en, string> = {
   question_free_text_placeholder: 'Введіть назву {noun}',
   question_free_text_placeholder_reverse: 'Введіть назву {noun}',
   question_free_text_bonus: '+{points} бонусних балів за введення вручну!',
+  question_free_text_retry_wrong: "Не вгадали — спробуй ще раз.",
   question_retry_notice: 'Неправильна відповідь. Спробуйте ще раз. Штраф: -{penalty} балів. Залишилось спроб: {attempts}.',
   question_result_skipped: 'Пропущено. Правильна відповідь: {answer}',
   question_result_correct: 'Правильно. Правильна відповідь: {answer}',

@@ -100,7 +100,7 @@ export const es: Record<keyof typeof en, string> = {
 
   question_loading: 'Cargando pregunta...',
   question_prompt: '¿Cuál es {promptNoun} de {value}?',
-  question_prompt_reverse: '¿Qué {answerNoun} tiene {promptNoun} {value}?',
+  question_prompt_reverse: '¿{value} es {promptNoun} de qué planeta?',
   question_input_mode_label: 'Modo de respuesta',
   question_input_mode_multiple_choice: 'Opción múltiple',
   question_input_mode_free_text: 'Escribir respuesta',
@@ -118,6 +118,7 @@ export const es: Record<keyof typeof en, string> = {
   question_free_text_placeholder: 'Escribe el nombre de {noun}',
   question_free_text_placeholder_reverse: 'Escribe el nombre de {noun}',
   question_free_text_bonus: '¡+{points} punto(s) de bonificación por escribirla!',
+  question_free_text_retry_wrong: "No es correcto — inténtalo de nuevo.",
   question_retry_notice: 'Opción incorrecta. Intenta de nuevo. Penalización: -{penalty} punto(s). Intentos restantes: {attempts}.',
   question_result_skipped: 'Omitida. Respuesta correcta: {answer}',
   question_result_correct: '¡Correcto! Respuesta correcta: {answer}',
