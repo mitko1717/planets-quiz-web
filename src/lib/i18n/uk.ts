@@ -137,7 +137,7 @@ export const uk: Record<keyof typeof en, string> = {
   question_scope_label: 'Регіон питань',
   question_scope_desc: 'Обмежте запитання певною категорією або використовуйте повний набір.',
   question_scope_chip_label: 'Поточний регіон: {scope}',
-  question_scope_world: 'Увесь світ',
+  question_scope_world: 'Світ',
   question_scope_africa: 'Африка',
   question_scope_americas: 'Пн. та Пд. Америка',
   question_scope_asia: 'Азія',
